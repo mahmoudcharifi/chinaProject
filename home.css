@@ -155,6 +155,7 @@ header .LinkDiv a {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 .villes i {
     margin-right: 7px;
