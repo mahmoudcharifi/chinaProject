@@ -167,6 +167,7 @@ header .LinkDiv a {
     left: 20px;
     border: 1px solid rgba(255, 255, 255, 0);
     transition: .3s;
+    overflow: hidden;
 }
 .villes .numerUniver:hover{
     border: 1px solid white;
@@ -180,7 +181,7 @@ header .LinkDiv a {
     background-color: rgba(240, 255, 242, 0);
     color: white;
     transition: .3s;
-
+    overflow: hidden;
 }
 .villes .PlayVd:hover{
     color: black;
