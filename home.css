@@ -222,6 +222,7 @@ header .LinkDiv a {
     color: black;
     font-size: 1.5rem;
     background-color: var(--second-backrond-color);
+    overflow: hidden;
 }
 
 #prevBtn{
