@@ -1,0 +1,621 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Poppins" , sans-serif;
+    direction: rtl;
+    overflow-x: hidden;
+}
+body{
+    background-color: rgb(169, 164, 164);
+    width: 100%;
+    justify-items: center;
+}
+:root{
+    --text-color : white;
+    --backround-color : rgb(239, 239, 239);
+    --second-backrond-color : rgb(245, 223, 223);
+    --main--color : rgb(112, 0, 0);
+
+}
+
+
+/* header  */
+
+header {
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    padding: 4rem 12%;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100; /* Reduced for practicality */
+    box-sizing: border-box; /* Ensures padding doesn't overflow */
+}
+
+header .DivLogo {
+    width: 35%;
+    position: relative;
+    left: -30%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Centers the image vertically */
+}
+
+header .DivLogo img {
+    width: 100px; /* Prevents image overflow */
+    height: auto;
+    border-radius: 15px;
+}
+
+header .LinkDiv {
+    width: 65%;
+    display: flex;
+    justify-content: flex-end; /* Aligns links to the right */
+    gap: 2rem; /* Adds space between links */
+}
+
+header .LinkDiv a {
+    text-decoration: none;
+    color: #000; /* Example color; customize as needed */
+    font-weight: bold;
+}
+
+
+
+
+
+
+.space{
+    width: 100%;
+    height: 100px;
+    background-color: var(--backround-color);
+}
+
+
+
+/* villes  */
+#ville{
+    overflow: hidden;
+    width: 100%;
+    height:max-content;
+    padding: 50px 70px;
+    background-color: var(--backround-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#ville h2{
+    font-size: 60px;
+    color: rgb(60, 60, 60);
+    margin-bottom: 15px;
+    text-align: center;
+}
+#ville p{
+    margin-bottom: 50px;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.villeDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+#ville .villes {
+    background-color: rgba(255, 0, 0, 0.33);
+    width: 330px;
+    height: 410px;
+    border-radius: 10px;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    overflow: hidden;   
+    position: relative;
+    margin:0px 20px ;
+    transition: .3s;
+}
+
+.villes img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      
+  object-position: center;
+  display: block;         
+  transition: transform 0.8s ease;  
+}
+.villes:hover img {
+    transform: scale(1.12);
+     
+}
+.villes span{
+   z-index: 2000;
+   font-weight: bold ;
+   position: absolute;
+   color: white;
+   font-size: 40px;
+   margin-left: 10px;
+   top: 70%;
+    left: 10px;
+
+}
+.villes button{
+    z-index: 2000;
+    position: absolute;
+    border-radius: 5px;
+    padding: 15px 10px;
+    cursor: pointer;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.villes i {
+    margin-right: 7px;
+    font-size: 25px;
+    border: 0;
+}
+.villes .numerUniver{
+    top: 84%;
+    left: 20px;
+    border: 1px solid rgba(255, 255, 255, 0);
+    transition: .3s;
+}
+.villes .numerUniver:hover{
+    border: 1px solid white;
+    background-color: rgba(240, 255, 242, 0);
+    color: var(--text-color);
+}
+.villes .PlayVd{
+    border: 1px solid white;
+    top: 84%;
+    left: 150px;
+    background-color: rgba(240, 255, 242, 0);
+    color: white;
+    transition: .3s;
+
+}
+.villes .PlayVd:hover{
+    color: black;
+    background-color: var(--text-color);
+}
+.villes .shadow{
+    z-index: 1000;
+ width: 100%;
+ height: 30%;
+ background: linear-gradient(
+        to top,
+        rgb(0, 0, 0) 25%,   
+        rgba(0, 0, 0, 0.45) 75%,  
+        rgba(0, 0, 0, 0.15) 85%, 
+        rgba(0, 0, 0, 0) 100%    
+    );
+ position: absolute;
+ top: 80%;
+ transition: .9s;
+}
+
+#ville .buttonArrows {
+    display: flex;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+#ville .buttonArrows button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border: 0;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    color: black;
+    font-size: 1.5rem;
+    background-color: var(--second-backrond-color);
+}
+
+#prevBtn{
+    margin-right: 10px;
+    margin-left: 30px;
+}
+#nextBtn{
+    margin-right: 30px;
+    margin-left: 10px;
+}
+#ville .buttonArrows button:hover {
+    transform: scale(1.15);
+    background-color: var(--main--color);
+    color: white;
+}
+
+#ville .buttonArrows button:active {
+    transform: scale(0.9);
+}
+
+
+#videoModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+}
+
+.videoContent {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    background: transparent;
+}
+
+#youtubeFrame {
+    width: 100%;
+    height: 500px;
+    border-radius: 12px;
+}
+
+#closeVideo {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+}
+@media (max-width: 600px){
+    #youtubeFrame{
+        height: 300px;
+    }
+}
+
+
+
+
+/* filiere */
+.specialities{
+    background-color: var(--backround-color);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.specialities h2{
+    font-size: 60px;
+    color: rgb(60, 60, 60);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.specialities p{
+    margin-bottom: 50px;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* ⭐ Grid ثابت ومضبوط */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    width: 100%;             /* ✔ كان مشكل هنا */
+    max-width: 1100px;       /* باش يبقى منظم */
+    justify-items: center;   /* ✔ يوسّط الكروت */
+}
+
+.card {
+    background: #fff;
+    padding: 24px;
+    border: 1px solid #eee;
+    border-radius: 14px;
+    text-align: center;
+    transition: .3s;
+    width: 200px;
+    color: var(--main--color);
+}
+
+.card:hover{
+    color: white;
+    background-color: var(--main--color);
+    cursor: pointer;
+}
+
+.card h3 {
+    font-size: clamp(14px, 2vw, 18px);
+}
+
+.card span {
+    font-size: clamp(12px, 1.6vw, 14px);
+    color: rgb(128, 128, 128);
+}
+
+.icon {
+    font-size: clamp(20px, 3vw, 26px);
+}
+
+/* 📱 Responsive */
+@media (max-width: 1100px) {
+    .cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 800px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .cards {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    
+}
+
+/* villes media */
+
+@media (max-width: 1300px) {
+    .villes {
+        width: 300px;
+        height: 380px;
+    }
+    #ville h2 ,.specialities h2{
+        font-size: 55px;
+    }
+}
+@media (max-width: 1234px) {
+
+    #ville h2 ,.specialities h2{
+        font-size: 50px;
+    }
+
+    .villeDiv {
+        gap: 12px;
+    }
+
+    .villes {
+        width: 260px;
+        height: 350px;
+        margin: 0 10px;
+    }
+
+    .villes span {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 1240px) {
+
+    #ville {
+        height: auto;
+        padding: 40px 0;
+    }
+
+    #ville h2 ,.specialities h2{
+        font-size: 40px;
+    }
+
+    .villeDiv {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .villes {
+        width: 45%;
+        height: 320px;
+    }
+
+    .villes span {
+        font-size: 28px;
+    }
+}
+@media (max-width: 600px) {
+
+    .villes {
+        width: 80%;
+        height: 300px;
+    }
+
+    .villes span {
+        font-size: 26px;
+    }
+}
+@media (max-width: 480px) {
+
+    #ville h2 ,.specialities h2{
+        font-size: 32px;
+        margin-bottom: 25px;
+    }
+
+    .villes {
+        width: 90%;
+        height: 260px;
+        margin: 0;
+    }
+
+    .villes span {
+        font-size: 22px;
+    }
+
+    .buttonArrows button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 360px) {
+
+    #ville h2,.specialities h2 {
+        font-size: 26px;
+    }
+
+    .villes {
+        height: 230px;
+    }
+
+    .villes span {
+        font-size: 20px;
+    }
+}
+@media (min-device-width: 1024px) and (max-device-width: 1366px) {
+
+    .villeDiv {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .villes {
+        width: 40%;
+        height: 360px;
+        margin: 10px;
+    }
+
+    .villes span {
+        font-size: 30px;
+    }
+
+    #ville h2 ,.specialities h2{
+        font-size: 55px;
+    }
+}
+
+
+/* القسم كامل */
+.steps {
+    text-align: center;
+    padding: 60px 20px;
+    direction: rtl;
+    background-color: var(--backround-color);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* العنوان */
+.steps h2 {
+    font-size: 60px;
+    color: rgb(60, 60, 60);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* النص التقدّمي */
+.steps .intro {
+    margin-bottom: 50px;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* الكونتينر لي فيه الكروت */
+.steps-wrapper {
+    background: #fff;
+    padding: 30px 25px;
+    border-radius: 18px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.07);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 80%;
+}
+
+/* كل كارد */
+.step-box {
+    flex: 1;
+    min-width: 220px;
+    max-width: 250px;
+    text-align: center;
+}
+
+/* رقم الخطوة */
+.step-number {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 15px;
+    border-radius: 12px;
+    background: #f5f5f5;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--main--color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* النسخة الخضراء */
+.step-number.success {
+    background: #e3fbe3;
+}
+
+.step-number.success img {
+    width: 24px;
+}
+
+/* عنوان كل خطوة */
+.step-box h3 {
+    font-size: 19px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+/* الوصف */
+.step-box p {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.6;
+}
+
+
+
+/* 📱📱 Responsive */
+
+/* لو كان أصغر من 992px → صفّين */
+@media (max-width: 992px) {
+    .steps-wrapper {
+        justify-content: center;
+        gap: 30px;
+    }
+}
+
+/* أصغر من 768px → كارد تحت كارد */
+@media (max-width: 768px) {
+    .step-box {
+        max-width: 100%;
+    }
+}
+
+/* أصغر من 480px → تبقى كلها في الوسط */
+@media (max-width: 480px) {
+    .steps {
+        padding: 40px 10px;
+    }
+    
+    .steps h2 {
+        font-size: 26px;
+    }
+
+    .step-number {
+        width: 42px;
+        height: 42px;
+        font-size: 20px;
+    }
+}

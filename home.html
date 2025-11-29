@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+<header>
+    <div class="LinkDiv"></div>
+    <div class="DivLogo"><img src="img/china.png" alt=""></div>
+</header>
+
+<div class="space"></div>
+
+<section id="ville">
+    <h2>أفضل المدن</h2>
+    <p>اكتشف تجربة دراسية لا تُنسى في بيئة تجمع بين العلم، التطبيق، والثقافة!</p>
+    <div class="villeDiv">
+        <div class="villes" id="peking">
+             <span>Peking</span>
+             <div class="shadow"></div>
+             <button class="numerUniver">93 universite</button>
+             <button class="PlayVd"  data-video="https://www.youtube.com/watch?v=UqHILyzcULE"><i class='bx bx-play'></i>Demarer le video</button>
+            <img src="img/peking.jpg" alt="">
+        </div>
+        <div class="villes" id="tianjin">
+            <span>Tianjin</span>
+             <div class="shadow"></div>
+             <button class="numerUniver">93 universite</button>
+             <button class="PlayVd"  data-video="https://www.youtube.com/watch?v=UqHILyzcULE"><i class='bx bx-play'></i>Demarer le video</button>
+            <img src="img/tianjin.jpg" alt="">
+        </div>
+        <div class="villes" id="qindao">
+            <span>Qindao</span>
+             <div class="shadow"></div>
+            <button class="numerUniver">93 universite</button>
+            <button class="PlayVd"  data-video="https://www.youtube.com/watch?v=UqHILyzcULE"><i class='bx bx-play'></i>Demarer le video</button>
+            <img src="img/qindao.jpg" alt="">
+        </div>
+        <div class="villes" id="zibo">
+            <span>Zibo</span>
+             <div class="shadow"></div>
+             <button class="numerUniver">93 universite</button>
+            <button class="PlayVd"  data-video=""><i class='bx bx-play'></i>Demarer le video</button>
+            <img src="img/zibo.jpg" alt="">
+        </div>
+        <div class="villes" id="hangzhou">
+            <span>Hangzhou</span>
+             <div class="shadow"></div>
+             <button class="numerUniver">93 universite</button>
+            <button class="PlayVd" data-video=""><i class='bx bx-play'></i>Demarer le video</button>
+            <img src="img/hangzhou.jpg" alt="">
+        </div>
+        <div class="villes" id="shanghai">
+             <span>Shanghai</span>
+             <div class="shadow"></div>
+             <button class="numerUniver">93 universite</button>
+            <button class="PlayVd"  data-video=""><i class='bx bx-play'></i>Demarer le video</button>
+            <img src="img/shanghai.jpg" alt="">
+        </div>
+        <div class="villes" id="wuhan">
+            <span>Wuhan</span>
+             <div class="shadow"></div>
+             <button class="numerUniver">93 universite</button>
+            <button class="PlayVd"  data-video=""><i class='bx bx-play'></i>Demarer le video</button>
+            <img src="img/wuhan.jpg" alt="">
+        </div>
+        <div class="villes" id="ningbo">
+            <span>Ningbo</span>
+             <div class="shadow"></div>
+             <button class="numerUniver">93 universite</button>
+            <button class="PlayVd"  data-video=""><i class='bx bx-play'></i>Demarer le video</button>
+            <img src="img/ningbo.jpg">
+        </div>
+        <div class="villes" id="xian">
+            <span>Xian</span>
+             <div class="shadow"></div>
+             <button class="numerUniver">93 universite</button>
+            <button class="PlayVd"  data-video=""><i class='bx bx-play'></i>Demarer le video</button>
+            <img src="img/xian.jpg">
+        </div>
+    </div>
+       
+        <div class="buttonArrows">
+            <button id="nextBtn"><i class='bx bx-right-arrow-alt' ></i></button>
+            <button id="prevBtn"><i class='bx bx-left-arrow-alt'></i></button>
+        </div>
+    </section>
+
+
+<div id="videoModal">
+    <div class="videoContent">
+        <span id="closeVideo">&times;</span>
+
+        <iframe id="youtubeFrame" 
+            src="" 
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+        </iframe>
+    </div>
+</div>
+
+
+<section class="specialities">
+    <h2 class="title">أبرز التخصصات</h2>
+    <p class="subtitle">اختر تخصصك بناءً على ما تحبه وما تجيده</p>
+
+    <div class="cards">
+     <div class="card">
+            <div class="icon"><i class='bx bxs-cog'></i></div>
+            <h3>تكنولوجيا المعلومات </h3>
+            <span>22 جامعة</span>
+            </div>
+
+        <div class="card">
+            <div class="icon"><i class='bx bx-first-aid' ></i></div>
+            <h3> الرعاية الصحية</h3>
+            <span>3 جامعة</span>
+        </div>
+
+        <div class="card">
+            <div class="icon"><i class='bx bx-desktop'></i></div>
+            <h3> علوم الحاسوب</h3>
+            <span>18 جامعة</span>
+        </div>
+
+        <div class="card">
+            <div class="icon"><i class='bx bxs-business'></i></div>
+            <h3>إدارة الأعمال </h3>
+            <span>30 جامعة</span>
+        </div>
+
+        <div class="card">
+            <div class="icon"><i class='bx bx-group'></i></div>
+            <h3>العلوم الإجتماعية</h3>
+            <span>22 جامعة</span>
+            </div>
+
+        <div class="card">
+            <div class="icon"><i class='bx bxs-school'></i></div>
+            <h3>الطب والصحة</h3>
+            <span>3 جامعة</span>
+        </div>
+
+        <div class="card">
+            <div class="icon"><i class='bx bxs-camera'></i></div>
+            <h3>الصحافة والإعلام</h3>
+            <span>18 جامعة</span>
+        </div>
+
+        <div class="card">
+            <div class="icon"><i class='bx bxs-briefcase-alt-2'></i></div>
+            <h3>التعليم والتدريب</h3>
+            <span>30 جامعة</span>
+        </div>
+
+        <div class="card">
+            <div class="icon"><i class='bx bxs-objects-vertical-center' ></i></div>
+            <h3>الإقتصاد</h3>
+            <span>40 جامعة</span>
+        </div>
+
+        <div class="card">
+            <div class="icon"><i class='bx bxs-hard-hat' ></i></div>
+            <h3>الهندسة المدنية</h3>
+            <span>9 جامعة</span>
+        </div>
+
+        <div class="card">
+            <div class="icon"><i class='bx bx-library'></i></div>
+            <h3>القانون</h3>
+            <span>3 جامعة</span>
+        </div>
+
+        <div class="card">
+            <div class="icon"><i class='bx bx-vial' ></i></div>
+            <h3>الكيمياء</h3>
+            <span>11 جامعة</span>
+        </div>
+    </div>
+</section>
+
+
+<section class="steps">
+    <h2>خطوات الدراسة في الصين</h2>
+    <p class="intro">
+        نولي اهتمامًا خاصًا بكل تفاصيل رحلتك، نرافقك من كتب بداية اهتمامك وحتى وصولك الآمن.
+        هدفنا هو أن تحظى بتجربة انتقال سلسة وناجحة.
+    </p>
+
+    <div class="steps-wrapper">
+        
+        <div class="step-box">
+            <div class="step-number">1</div>
+            <h3>الإستشارة و التوجيه</h3>
+            <p>التوجيه و الإرشاد في اختيار (الشعبة / المدينة / الجامعة) المناسبة للطالب.</p>
+        </div>
+
+        <div class="step-box">
+            <div class="step-number">2</div>
+            <h3>تقديم الطلب</h3>
+            <p>نساعد طلابنا في التقديم إلى الجامعات الصينية والحصول على المنح الدراسية.</p>
+        </div>
+
+        <div class="step-box">
+            <div class="step-number">3</div>
+            <h3>القبول الجامعي</h3>
+            <p>ضمان القبول الجامعي الرسمي + وثيقة JW202.</p>
+        </div>
+
+        <div class="step-box">
+            <div class="step-number success">
+                <i class='bx bxs-user-check'></i>
+            </div>
+            <h3>السفر نحو الصين</h3>
+            <p>نرافقك من لحظة مغادرتك حتى دخولك السكن الجامعي.</p>
+        </div>
+
+    </div>
+</section>
+
+
+    <script src="home.js"></script>
+</body>
+</html>
