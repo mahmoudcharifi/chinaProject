@@ -80,3 +80,31 @@ window.addEventListener("click", (e) => {
     }
 });
 
+
+
+
+
+
+const form = document.getElementById('contactForm');
+
+form.addEventListener('submit', async (e) => {
+e.preventDefault();
+
+const data = {
+nom: form.nom.value,
+email: form.email.value,
+subject: form.subject.value,
+message: form.message.value
+};
+
+const res = await fetch('/api/contact', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify(data)
+});
+
+const result = await res.json();
+alert(result.message);
+form.reset();
+});
+
