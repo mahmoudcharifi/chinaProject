@@ -86,25 +86,31 @@ window.addEventListener("click", (e) => {
 
 const form = document.getElementById("contactForm");
 
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+if (form) {
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-    const data = {
-        nom: form.nom.value,
-        prenom: form.prenom.value,    // ← tu as oublié cette ligne
-        email: form.email.value,
-        subject: form.subject.value,
-        message: form.message.value
-    };
+        const data = {
+            nom: form.nom.value,
+            prenom: form.prenom.value,
+            email: form.email.value,
+            subject: form.subject.value,
+            message: form.message.value
+        };
 
-    const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await res.json();
+            alert(result.message);
+        } catch (error) {
+            alert("Erreur : impossible de contacter le serveur.");
+        }
     });
-
-    const result = await res.json();
-    alert(result.message);
-});
+}
