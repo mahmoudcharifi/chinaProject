@@ -34,8 +34,8 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 100; /* Reduced for practicality */
-    box-sizing: border-box; /* Ensures padding doesn't overflow */
+    z-index: 100; 
+    box-sizing: border-box; 
 }
 
 header .DivLogo {
@@ -44,11 +44,11 @@ header .DivLogo {
     left: -30%;
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Centers the image vertically */
+    justify-content: flex-start; 
 }
 
 header .DivLogo img {
-    width: 100px; /* Prevents image overflow */
+    width: 100px; 
     height: auto;
     border-radius: 15px;
 }
@@ -56,13 +56,15 @@ header .DivLogo img {
 header .LinkDiv {
     width: 65%;
     display: flex;
-    justify-content: flex-end; /* Aligns links to the right */
-    gap: 2rem; /* Adds space between links */
+    justify-content: flex-end; 
+    justify-content: center;
+    align-items: center;
+    gap: 2rem; 
 }
 
 header .LinkDiv a {
     text-decoration: none;
-    color: #000; /* Example color; customize as needed */
+    color: #000; 
     font-weight: bold;
 }
 
@@ -310,14 +312,13 @@ header .LinkDiv a {
     margin-right: 10px;
 }
 
-/* ⭐ Grid ثابت ومضبوط */
 .cards {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 22px;
-    width: 100%;             /* ✔ كان مشكل هنا */
-    max-width: 1100px;       /* باش يبقى منظم */
-    justify-items: center;   /* ✔ يوسّط الكروت */
+    width: 100%;            
+    max-width: 1100px;      
+    justify-items: center;  
 }
 
 .card {
@@ -350,7 +351,6 @@ header .LinkDiv a {
     font-size: clamp(20px, 3vw, 26px);
 }
 
-/* 📱 Responsive */
 @media (max-width: 1100px) {
     .cards {
         grid-template-columns: repeat(3, 1fr);
@@ -499,7 +499,6 @@ header .LinkDiv a {
 }
 
 
-/* القسم كامل */
 .steps {
     text-align: center;
     padding: 60px 20px;
@@ -512,7 +511,6 @@ header .LinkDiv a {
     justify-content: center;
 }
 
-/* العنوان */
 .steps h2 {
     font-size: 60px;
     color: rgb(60, 60, 60);
@@ -520,7 +518,6 @@ header .LinkDiv a {
     text-align: center;
 }
 
-/* النص التقدّمي */
 .steps .intro {
     margin-bottom: 50px;
     text-align: center;
@@ -528,7 +525,6 @@ header .LinkDiv a {
     margin-right: 10px;
 }
 
-/* الكونتينر لي فيه الكروت */
 .steps-wrapper {
     background: #fff;
     padding: 30px 25px;
@@ -541,7 +537,6 @@ header .LinkDiv a {
     width: 80%;
 }
 
-/* كل كارد */
 .step-box {
     flex: 1;
     min-width: 220px;
@@ -549,7 +544,6 @@ header .LinkDiv a {
     text-align: center;
 }
 
-/* رقم الخطوة */
 .step-number {
     width: 48px;
     height: 48px;
@@ -564,7 +558,6 @@ header .LinkDiv a {
     justify-content: center;
 }
 
-/* النسخة الخضراء */
 .step-number.success {
     background: #e3fbe3;
 }
@@ -573,14 +566,12 @@ header .LinkDiv a {
     width: 24px;
 }
 
-/* عنوان كل خطوة */
 .step-box h3 {
     font-size: 19px;
     margin-bottom: 10px;
     font-weight: 700;
 }
 
-/* الوصف */
 .step-box p {
     font-size: 15px;
     color: #666;
@@ -589,9 +580,7 @@ header .LinkDiv a {
 
 
 
-/* 📱📱 Responsive */
 
-/* لو كان أصغر من 992px → صفّين */
 @media (max-width: 992px) {
     .steps-wrapper {
         justify-content: center;
@@ -599,14 +588,12 @@ header .LinkDiv a {
     }
 }
 
-/* أصغر من 768px → كارد تحت كارد */
 @media (max-width: 768px) {
     .step-box {
         max-width: 100%;
     }
 }
 
-/* أصغر من 480px → تبقى كلها في الوسط */
 @media (max-width: 480px) {
     .steps {
         padding: 40px 10px;
@@ -626,3 +613,16 @@ header .LinkDiv a {
 
 
 
+.LinkDiv #longuageSelect{
+    margin-left: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+#longuageSelect:hover{
+    border: 1px solid var(--main--color);
+}
+#longuageSelect:focus{
+    outline: none;
+    border: 2px solid var(--main--color);
+}

@@ -68,8 +68,14 @@ header {
 
 .contact-form{
     width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-
+.contact-form h2{
+    margin-bottom: 20px;
+}
 .contact-image{
     width: 30%;
 }
@@ -156,4 +162,27 @@ form button:hover{
     .socials{
         justify-content: center;
     }
+}
+
+
+
+
+.LinkDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.LinkDiv #longuageSelect{
+    margin-left: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+#longuageSelect:hover{
+    border: 1px solid var(--main--color);
+}
+#longuageSelect:focus{
+    outline: none;
+    border: 2px solid var(--main--color);
 }
