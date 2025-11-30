@@ -80,16 +80,17 @@ header {
     align-items: center;
 }
 .contact-form h2{
+    margin-bottom: 7px;
+    font-size: 60px;
+    color: rgb(60, 60, 60);
+    text-align: center;
+}
+.contact-form span{
     margin-bottom: 20px;
 }
-.contact-image{
-    width: 30%;
-}
 
-.contact-image img{
-    width: 100%;
-    border-radius: 14px;
-}
+
+
 
 /* form */
 form{
@@ -136,7 +137,7 @@ form button:hover{
         text-align: center;
     }
 
-    .contact-form, .contact-image{
+    .contact-form{
         width: 100%;
     }
 
