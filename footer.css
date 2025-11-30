@@ -1,90 +1,61 @@
+/* ============= FOOTER ============= */
 
-
-footer {
-    background: #fff;
-    padding: 60px 40px 40px;
-    direction: rtl;
-    color: #333;
+footer{
+    background: white;
+    padding: 60px 40px;
     width: 100%;
 }
 
-.footer-content {
+.footer-content{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4,1fr);
     gap: 40px;
-    align-items: flex-start;
 }
 
-.footer-col h3 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-
-.footer-col ul {
+.footer-col ul{
     list-style: none;
-    padding: 0;
 }
-.footer-content .margin-right{
-    margin-right: 40px;
-}
-.footer-col ul li {
-    margin-bottom: 10px;
-    font-size: 15px;
+
+.footer-col ul li{
+    margin: 8px 0;
     color: #666;
 }
 
-.footer-logo {
-    width: 130px;
-    margin-bottom: 15px;
+.footer-logo{
+    width: 120px;
+    margin-bottom: 14px;
 }
 
-.socials {
+.socials{
     display: flex;
     gap: 10px;
-    margin-bottom: 15px;
 }
 
-.socials i {
-    background: #f3f3f3;
+.socials i{
+    background: #f1f1f1;
     padding: 10px;
     border-radius: 50%;
     font-size: 20px;
-    cursor: pointer;
     transition: 0.3s;
 }
 
-.socials i:hover {
-    background: #e8e8e8;
+.socials i:hover{
+    background: #ddd;
 }
 
-.contact-col p {
-    margin-bottom: 8px;
-    font-size: 15px;
-    color: #666;
-}
-
-/* Footer bottom */
-.footer-bottom {
-    margin-top: 40px;
-    border-top: 1px solid #ddd;
-    padding-top: 20px;
+.footer-bottom{
     text-align: center;
+    margin-top: 35px;
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
 }
 
-.footer-bottom .links {
-    margin-bottom: 10px;
-}
-
-.footer-bottom a {
+.footer-bottom a{
     margin: 0 10px;
-    font-size: 14px;
     color: #555;
 }
-
-.copy {
-    font-size: 14px;
-    color: #777;
+.margin-right{
+    margin-right: 60px;
 }
 
 
