@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="Contact.css">
+    <script src="api/contact.js" defer></script>
+</head>
+<body>
+
+<header>
+    <div class="LinkDiv"></div>
+    <div class="DivLogo"><img src="img/china.png" alt=""></div>
+</header>
+
+
+
+<section>
+
+  <h2>Formulaire de contact / Istichara gratuite</h2>
+
+  <form id="contactForm">
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" name="nom" required>
+
+    <label for="prenom">Prénom :</label>
+    <input type="text" id="prenom" name="prenom" required>
+
+    <label for="email">Email :</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="subject">Sujet :</label>
+    <input type="text" id="subject" name="subject" required>
+
+    <label for="message">Message / Question :</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit">Envoyer</button>
+  </form>
+</section>
+
+
+    <script src="home.js"></script>
+</body>
+</html>
