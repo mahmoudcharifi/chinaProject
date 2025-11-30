@@ -1,0 +1,54 @@
+/* RESET */
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    direction: rtl;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(245,245,245);
+    overflow-x: hidden;
+}
+
+
+/* ============= HEADER ============= */
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 90px;
+    padding: 0 7%;
+    background: rgba(255,255,255,0.45);
+    backdrop-filter: blur(14px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 10;
+}
+
+.DivLogo img{
+    width: 80px;
+}
+
+.LinkDiv{
+    display: flex;
+    gap: 2rem;
+}
+
+.LinkDiv a{
+    font-size: 17px;
+    font-weight: 600;
+    color: black;
+    text-decoration: none;
+}
+
+
+/* spacing after header */
+.space{
+    height: 120px;
+    width: 100%;
+}
