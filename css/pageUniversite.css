@@ -11,7 +11,13 @@ body{
     background-color: rgb(245,245,245);
     overflow-x: hidden;
 }
+:root{
+    --text-color : white;
+    --backround-color : rgb(239, 239, 239);
+    --second-backrond-color : rgb(245, 223, 223);
+    --main--color : rgb(112, 0, 0);
 
+}
 
 /* ============= HEADER ============= */
 
@@ -51,4 +57,30 @@ header {
 .space{
     height: 120px;
     width: 100%;
+}
+
+
+
+
+
+
+
+.LinkDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.LinkDiv #longuageSelect{
+    margin-left: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+#longuageSelect:hover{
+    border: 1px solid var(--main--color);
+}
+#longuageSelect:focus{
+    outline: none;
+    border: 2px solid var(--main--color);
 }
