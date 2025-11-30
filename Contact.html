@@ -8,20 +8,45 @@
     <link rel="stylesheet" href="css/Contact.css">
     <link rel="stylesheet" href="css/footer.css">
     <script src="formApi.js" defer></script>
+    
+
+   
 </head>
 <body>
 
 <header>
+    <div class="DivLogo">
+        <!-- ton logo si tu veux -->
+    </div>
+
     <div class="LinkDiv">
         <a href="home.html">home</a>
         <a href="Contact.html">Contacte</a>
         <a href="pageUniversite.html">universite</a>
-        <select name="" id="longuageSelect">
+
+        <select id="longuageSelect">
             <option value="FR">FR</option>
             <option value="AR">AR</option>
         </select>
+
+        <i class='bx bx-menu' id="menuBtn"></i>
     </div>
 </header>
+
+<div id="overlayMenu"></div>
+
+<nav class="mobile-menu" id="mobileMenu">
+    <i class='bx bx-x' id="closeMenu"></i>
+
+    <a href="home.html">Home</a>
+    <a href="Contact.html">Contacte</a>
+    <a href="pageUniversite.html">Université</a>
+
+    <select id="mobileLang">
+        <option value="FR">FR</option>
+        <option value="AR">AR</option>
+    </select>
+</nav>
 <div class="space"></div>
 
 
@@ -124,6 +149,7 @@
     </div>
 
 </footer>
+    <script src="menu.js" ></script>
 
 
 </body>

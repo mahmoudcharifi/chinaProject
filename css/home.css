@@ -21,52 +21,141 @@ body{
 
 /* header  */
 
+/* ================= HEADER ================= */
+
 header {
     position: fixed;
-    overflow: hidden;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100px;
-    padding: 4rem 12%;
+    height: 80px;
+    padding: 1rem 6%;
     background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(10px);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 100; 
-    box-sizing: border-box; 
+    z-index: 100;
+    box-sizing: border-box;
 }
 
+/* Logo */
 header .DivLogo {
-    width: 35%;
-    position: relative;
-    left: -30%;
+    width: auto;
     display: flex;
     align-items: center;
-    justify-content: flex-start; 
 }
 
 header .DivLogo img {
-    width: 100px; 
+    width: 60px;
     height: auto;
     border-radius: 15px;
 }
 
+/* Links */
 header .LinkDiv {
-    width: 65%;
     display: flex;
-    justify-content: flex-end; 
-    justify-content: center;
     align-items: center;
-    gap: 2rem; 
+    gap: 1.5rem;
 }
 
 header .LinkDiv a {
     text-decoration: none;
-    color: #000; 
+    color: #000;
     font-weight: bold;
 }
+
+/* Menu icon hidden for desktop */
+#menuBtn {
+    display: none;
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+
+/* ================= MOBILE MENU ================= */
+
+/* Overlay (background dark) */
+#overlayMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(3px);
+    display: none;
+    z-index: 9990;
+}
+
+/* Sidebar menu */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 250px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: 0.3s ease;
+    z-index: 9999;
+}
+
+.mobile-menu a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #000;
+    font-weight: bold;
+}
+
+.mobile-menu select {
+    padding: 6px;
+    font-size: 1rem;
+}
+
+.mobile-menu i {
+    font-size: 2rem;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 800px) {
+
+    /* Smaller header */
+    header {
+        height: 60px;
+        padding: 0 5%;
+    }
+
+    header .DivLogo img {
+        width: 45px;
+    }
+
+    /* Hide links + select */
+    .LinkDiv a,
+    .LinkDiv select {
+        display: none;
+    }
+
+    /* Show menu icon */
+    #menuBtn {
+        display: block !important;
+        font-size: 1.9rem;
+    }
+}
+
+
 
 
 
