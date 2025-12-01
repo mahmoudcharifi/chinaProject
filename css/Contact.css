@@ -163,6 +163,13 @@ header .LinkDiv a {
 
 
 /* form */
+.contact-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    gap: 40px;
+}
 form{
     background: #fff;
     padding: 30px;
