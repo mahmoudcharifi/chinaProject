@@ -1,108 +1,93 @@
-export const config = {
-    runtime: "nodejs" // <-- IMPORTANT : PAS EDGE POUR L’INSTANT
-};
-
 import nodemailer from "nodemailer";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-async function generateAiReply(message) {
-    console.log("🔍 [DEBUG] Appel Gemini...");
+// --- 1) Fonction pour générer une réponse automatique via Gemini ---
+async function generateAiReply(userMessage) {
+    try {
+        const apiKey = process.env.GEMINI_API_KEY;
+        const genAI = new GoogleGenerativeAI(apiKey);
 
-    const apiKey = process.env.GEMINI_API_KEY;
-    console.log("🔍 [DEBUG] GEMINI_API_KEY =", apiKey ? "OK" : "MANQUANT ❌");
+        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-    const response = await fetch(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + apiKey,
-        {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                contents: [
-                    {
-                        parts: [
-                            {
-                                text: "Réponds comme un expert. Question de l'utilisateur : " + message
-                            }
-                        ]
-                    }
-                ]
-            })
-        }
-    );
+        const prompt =
+            "Tu es un expert professionnel des études en Chine. " +
+            "Réponds de manière claire, utile et polie à la question suivante : " +
+            userMessage;
 
-    const data = await response.json();
-    console.log("🔍 [DEBUG] Réponse Gemini =", data);
+        const result = await model.generateContent(prompt);
 
-    return data.candidates?.[0]?.content?.parts?.[0]?.text || "Merci pour votre message !";
+        const reply = result?.response?.text();
+
+        return reply || "Merci pour votre message ! Nous reviendrons vers vous sous 24h.";
+    } catch (err) {
+        console.error("Erreur Gemini :", err);
+        return "Merci pour votre message ! Nous reviendrons vers vous sous 24h.";
+    }
 }
 
+// --- 2) API Route principale ---
 export default async function handler(req, res) {
-    console.log("🚀 [DEBUG] API contact démarrée");
-
     if (req.method !== "POST") {
-        console.log("❌ [DEBUG] Méthode non autorisée :", req.method);
         return res.status(405).json({ message: "Méthode non autorisée" });
     }
 
-    console.log("📩 [DEBUG] Body reçu :", req.body);
-
     const { nom, prenom, email, subject, message } = req.body;
 
-    try {
-        console.log("✉️ [DEBUG] Configuration Nodemailer...");
+    // Sécurités basiques
+    if (!nom || !prenom || !email || !subject || !message) {
+        return res.status(400).json({ message: "Tous les champs sont obligatoires." });
+    }
 
+    try {
+        // A) Générer la réponse automatique avec Gemini
+        const aiReply = await generateAiReply(message);
+
+        // B) Configurer Nodemailer
         const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
                 user: process.env.GMAIL_USER,
-                pass: process.env.GMAIL_PASSWORD
-            }
+                pass: process.env.GMAIL_PASSWORD,
+            },
         });
 
-        console.log("🔍 [DEBUG] GMAIL_USER =", process.env.GMAIL_USER ? "OK" : "MANQUANT ❌");
-        console.log("🔍 [DEBUG] GMAIL_PASSWORD =", process.env.GMAIL_PASSWORD ? "OK" : "MANQUANT ❌");
-
-        // TEST Gmail credentials
-        await transporter.verify();
-        console.log("✅ [DEBUG] SMTP Gmail prêt");
-
-        // Réponse AI
-        const autoReply = await generateAiReply(message);
-
-        console.log("🤖 [DEBUG] Réponse AI :", autoReply);
-
-        // Email vers client
+        // C) Envoyer l’email AUTOMATIQUE au client
         await transporter.sendMail({
             from: process.env.GMAIL_USER,
             to: email,
             subject: "Merci pour votre message ✔",
-            text: autoReply
+            text: aiReply,
         });
 
-        console.log("📤 [DEBUG] Email envoyé au client");
-
-        // Email admin
+        // D) T’envoyer à toi les infos du client
         await transporter.sendMail({
-            from: email,
+            from: process.env.GMAIL_USER,
             to: process.env.GMAIL_USER,
-            subject: `Nouveau message : ${subject}`,
+            subject: `📨 Nouveau message : ${subject}`,
             text: `
 Nom : ${nom}
 Prénom : ${prenom}
 Email : ${email}
-Message :
+
+Message du client :
 ${message}
 
-Réponse automatique :
-${autoReply}
-`
+-----------------------------
+
+Réponse automatique envoyée au client :
+${aiReply}
+            `,
         });
 
-        console.log("📥 [DEBUG] Email envoyé à l’admin");
-
-        return res.status(200).json({ message: "Message envoyé" });
-
-    } catch (err) {
-        console.error("🔥 [ERREUR] Crash API :", err);
-        return res.status(500).json({ message: "Erreur serveur", error: err.toString() });
+        return res.status(200).json({
+            success: true,
+            message: "Message envoyé + réponse automatique envoyée ✔",
+        });
+    } catch (error) {
+        console.error("Erreur serveur :", error);
+        return res.status(500).json({
+            success: false,
+            message: "Erreur : impossible de contacter le serveur.",
+        });
     }
 }
