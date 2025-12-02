@@ -1,31 +1,65 @@
 import nodemailer from "nodemailer";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// --- 1) Fonction pour générer une réponse automatique via Gemini ---
-async function generateAiReply(userMessage) {
+// -----------------------------
+// 1) Vérifier si un email existe vraiment
+// -----------------------------
+async function emailExists(email) {
     try {
-        const apiKey = process.env.GEMINI_API_KEY;
-        const genAI = new GoogleGenerativeAI(apiKey);
+        const apiKey = process.env.EMAIL_CHECK_KEY;
 
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        const res = await fetch(
+            `https://emailvalidation.abstractapi.com/v1/?api_key=${apiKey}&email=${email}`
+        );
 
-        const prompt =
-            "Tu es un expert professionnel des études en Chine. " +
-            "Réponds de manière claire, utile et polie à la question suivante : " +
-            userMessage;
+        const data = await res.json();
 
-        const result = await model.generateContent(prompt);
+        // deliverable → email réel
+        return data.deliverability === "DELIVERABLE";
+    } catch (error) {
+        console.error("Erreur verification email :", error);
 
-        const reply = result?.response?.text();
-
-        return reply || "Merci pour votre message ! Nous reviendrons vers vous sous 24h.";
-    } catch (err) {
-        console.error("Erreur Gemini :", err);
-        return "Merci pour votre message ! Nous reviendrons vers vous sous 24h.";
+        // Si problème de réseau → on considère valide
+        return true;
     }
 }
 
-// --- 2) API Route principale ---
+// -----------------------------
+// 2) Générer une réponse automatique via Gemini AI
+// -----------------------------
+async function generateAiReply(message) {
+    const apiKey = process.env.GEMINI_API_KEY;
+
+    const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`,
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                contents: [
+                    {
+                        parts: [
+                            {
+                                text:
+                                    "Tu es un expert en études en Chine. Réponds clairement et poliment. Message : " + message
+                            }
+                        ]
+                    }
+                ]
+            })
+        }
+    );
+
+    const data = await response.json();
+
+    return (
+        data.candidates?.[0]?.content?.parts?.[0]?.text ||
+        "Merci pour votre message ! Nous vous répondrons bientôt."
+    );
+}
+
+// -----------------------------
+// 3) API principale
+// -----------------------------
 export default async function handler(req, res) {
     if (req.method !== "POST") {
         return res.status(405).json({ message: "Méthode non autorisée" });
@@ -33,61 +67,69 @@ export default async function handler(req, res) {
 
     const { nom, prenom, email, subject, message } = req.body;
 
-    // Sécurités basiques
+    // Vérification champs vide
     if (!nom || !prenom || !email || !subject || !message) {
         return res.status(400).json({ message: "Tous les champs sont obligatoires." });
     }
 
-    try {
-        // A) Générer la réponse automatique avec Gemini
-        const aiReply = await generateAiReply(message);
+    // Vérification email réel
+    const isRealEmail = await emailExists(email);
 
-        // B) Configurer Nodemailer
+    if (!isRealEmail) {
+        return res.status(400).json({
+            success: false,
+            message: "L'adresse email n'existe pas réellement. Merci d'utiliser un email valide."
+        });
+    }
+
+    try {
+        // 1) Réponse automatique AI
+        const autoReply = await generateAiReply(message);
+
+        // 2) Config nodemailer
         const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
                 user: process.env.GMAIL_USER,
                 pass: process.env.GMAIL_PASSWORD,
-            },
+            }
         });
 
-        // C) Envoyer l’email AUTOMATIQUE au client
+        // 3) Envoyer la réponse automatique au client
         await transporter.sendMail({
             from: process.env.GMAIL_USER,
             to: email,
             subject: "Merci pour votre message ✔",
-            text: aiReply,
+            text: autoReply
         });
 
-        // D) T’envoyer à toi les infos du client
+        // 4) Envoyer le message complet à toi (admin)
         await transporter.sendMail({
-            from: process.env.GMAIL_USER,
+            from: email,
             to: process.env.GMAIL_USER,
-            subject: `📨 Nouveau message : ${subject}`,
+            subject: `Nouveau message reçu : ${subject}`,
             text: `
 Nom : ${nom}
 Prénom : ${prenom}
 Email : ${email}
 
-Message du client :
+Message :
 ${message}
 
 -----------------------------
 
-Réponse automatique envoyée au client :
-${aiReply}
-            `,
+Réponse envoyée automatiquement :
+${autoReply}
+`
         });
 
         return res.status(200).json({
             success: true,
-            message: "Message envoyé + réponse automatique envoyée ✔",
+            message: "Message envoyé et réponse automatique envoyée."
         });
+
     } catch (error) {
         console.error("Erreur serveur :", error);
-        return res.status(500).json({
-            success: false,
-            message: "Erreur : impossible de contacter le serveur.",
-        });
+        return res.status(500).json({ message: "Erreur serveur." });
     }
 }
