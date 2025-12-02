@@ -1,6 +1,19 @@
 import nodemailer from "nodemailer";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+// Vérifier si l'email existe réellement
+async function emailExists(email) {
+    const key = process.env.MAILBOX_KEY;
+
+    const response = await fetch(
+        `https://apilayer.net/api/check?access_key=${key}&email=${email}&smtp=1&format=1`
+    );
+
+    const data = await response.json();
+
+    return data.smtp_check === true; // true = email existe
+}
+
 export default async function handler(req, res) {
     if (req.method !== "POST") {
         return res.status(405).json({ message: "Méthode non autorisée" });
@@ -13,9 +26,17 @@ export default async function handler(req, res) {
             return res.status(400).json({ message: "Champs manquants" });
         }
 
-        // -------------------------
-        // 1️⃣ EMAIL POUR TOI (ADMIN)
-        // -------------------------
+        // Vérification email réel
+        const isReal = await emailExists(email);
+
+        if (!isReal) {
+            return res.status(400).json({
+                success: false,
+                message: "Cet email n'existe pas réellement. Merci d'en entrer un valide."
+            });
+        }
+
+        // 1) Config Gmail
         const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
@@ -24,6 +45,7 @@ export default async function handler(req, res) {
             },
         });
 
+        // 2) Envoi du message à l’admin
         await transporter.sendMail({
             from: email,
             to: process.env.GMAIL_USER,
@@ -33,50 +55,41 @@ Nom : ${nom}
 Prénom : ${prenom}
 Email : ${email}
 
-Message du client :
+Message :
 ${message}
             `,
         });
 
-        // -------------------------
-        // 2️⃣ APPEL À GEMINI (nouvelle version)
-        // -------------------------
+        // 3) Réponse automatique AI
         const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 
         const model = genAI.getGenerativeModel({
-            model: "gemini-1.5-flash", // 🔥 modèle CORRECT
+            model: "gemini-1.5-flash",
         });
 
         const prompt = `
-Tu es un expert qui aide les étudiants marocains à étudier en Chine.
+Réponds comme un conseiller expert en études en Chine.
 
-Réponds DIRECTEMENT à la question suivante :
+Message du client :
 "${message}"
 
-Donne une réponse claire, utile, professionnelle.
-Réponds dans la même langue que la question (FR ou AR).
+Réponds dans sa langue.
         `;
 
         const aiResult = await model.generateContent(prompt);
         const aiReply = aiResult.response.text();
 
-        // -------------------------
-        // 3️⃣ ENVOYER LA RÉPONSE AU CLIENT
-        // -------------------------
+        // 4) Envoi de la réponse automatique au client
         await transporter.sendMail({
             from: process.env.GMAIL_USER,
             to: email,
-            subject: "Réponse à votre demande ✔",
+            subject: "Merci pour votre message ✔",
             text: aiReply,
         });
 
-        // -------------------------
-        // 4️⃣ RÉPONSE SERVEUR
-        // -------------------------
         return res.status(200).json({
             success: true,
             message: "Message envoyé + réponse automatique envoyée ✔",
-            aiReply: aiReply,
         });
 
     } catch (error) {
