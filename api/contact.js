@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 
-// --- Demander une réponse à Gemini ---
+// --- Fonction qui demande une réponse précise à Gemini ---
 async function generateAiReply(message) {
     const apiKey = process.env.GEMINI_API_KEY;
 
@@ -15,8 +15,9 @@ async function generateAiReply(message) {
                         parts: [
                             {
                                 text: 
-                                    "Réponds au message de l'utilisateur de manière professionnelle, claire et utile. " +
-                                    "Tu es un expert en conseils sur l'étude en Chine. Message de l'utilisateur : " + message
+                                    "Réponds DIRECTEMENT au message de l'utilisateur. " +
+                                    "Donne une réponse claire, détaillée et utile. " +
+                                    "Tu es un expert en études en Chine. Voici son message : " + message
                             }
                         ]
                     }
@@ -26,10 +27,14 @@ async function generateAiReply(message) {
     );
 
     const data = await response.json();
-    return (
-        data.candidates?.[0]?.content?.parts?.[0]?.text ||
-        "Merci pour votre message ! Nous reviendrons vers vous rapidement."
-    );
+
+    // → SI Gemini répond correctement :
+    if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
+        return data.candidates[0].content.parts[0].text;
+    }
+
+    // → SI Gemini n’a pas pu répondre (rare), une phrase propre :
+    return "Merci pour votre message. Nous allons revenir vers vous avec plus de détails.";
 }
 
 // --- API principale ---
@@ -41,7 +46,7 @@ export default async function handler(req, res) {
     const { nom, prenom, email, subject, message } = req.body;
 
     try {
-        // 1. Générer la réponse de Gemini
+        // 1. Demander la réponse intelligente à Gemini
         const autoReply = await generateAiReply(message);
 
         // 2. Configurer Gmail via Nodemailer
@@ -53,38 +58,34 @@ export default async function handler(req, res) {
             }
         });
 
-        // 3. Envoyer la réponse automatique au client
+        // 3. Envoyer la réponse automatique AU CLIENT
         await transporter.sendMail({
             from: process.env.GMAIL_USER,
             to: email,
-            subject: "Merci pour votre message ✨",
+            subject: "Réponse à votre demande ✔",
             text: autoReply
         });
 
-        // 4. T’envoyer le message + la réponse
+        // 4. T'envoyer le message + la réponse générée
         await transporter.sendMail({
             from: process.env.GMAIL_USER,
             to: process.env.GMAIL_USER,
             subject: `Nouveau message : ${subject}`,
             text: `
-Nouveau message reçu :
+Message reçu de ${nom} ${prenom} (${email}) :
 
-Nom : ${nom}
-Prénom : ${prenom}
-Email : ${email}
-
-Message du client :
 ${message}
 
----------------------------
+-------------------------------
 
-Réponse générée par Gemini :
+Réponse générée par l'IA (Gemini) :
+
 ${autoReply}
 `
         });
 
         return res.status(200).json({
-            message: "Message et réponse automatique envoyés avec succès !"
+            message: "Message envoyé + réponse automatique générée !"
         });
 
     } catch (error) {
