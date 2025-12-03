@@ -64,7 +64,25 @@ header .LinkDiv a {
     color: #000;
     font-weight: bold;
 }
+.LinkDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.LinkDiv #longuageSelect{
+    margin-left: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+#longuageSelect:hover{
+    border: 1px solid var(--main--color);
+}
+#longuageSelect:focus{
+    outline: none;
+    border: 1px solid var(--main--color);
+}
 /* Menu icon hidden for desktop */
 #menuBtn {
     display: none;
@@ -251,22 +269,9 @@ form button:hover{
 
 
 
-.LinkDiv {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.LinkDiv #longuageSelect{
-    margin-left: 20px;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-#longuageSelect:hover{
-    border: 1px solid var(--main--color);
-}
-#longuageSelect:focus{
-    outline: none;
-    border: 2px solid var(--main--color);
+/* header selected a  */
+.LinkDiv .selected ,.mobile-menu .selected{
+    color: var(--main--color);
+    text-decoration: underline;
 }

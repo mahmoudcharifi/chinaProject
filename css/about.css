@@ -11,6 +11,7 @@ body{
     background-color: rgb(245,245,245);
     overflow-x: hidden;
 }
+
 :root{
     --text-color : white;
     --backround-color : rgb(239, 239, 239);
@@ -18,7 +19,6 @@ body{
     --main--color : rgb(112, 0, 0);
 
 }
-
 /* header  */
 
 /* ================= HEADER ================= */
@@ -58,12 +58,12 @@ header .LinkDiv {
     align-items: center;
     gap: 1.5rem;
 }
+
 header .LinkDiv a {
     text-decoration: none;
     color: #000;
     font-weight: bold;
 }
-
 .LinkDiv {
     display: flex;
     align-items: center;
@@ -90,11 +90,7 @@ header .LinkDiv a {
     font-size: 2rem;
 }
 
-.space{
-    width: 100%;
-    height: 100px;
-    background-color: var(--backround-color);
-}
+
 /* ================= MOBILE MENU ================= */
 
 /* Overlay (background dark) */
@@ -176,6 +172,16 @@ header .LinkDiv a {
         font-size: 1.9rem;
     }
 }
+
+.space{
+    width: 100%;
+    height: 100px;
+    background-color: var(--backround-color);
+}
+
+
+
+
 
 
 
