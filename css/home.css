@@ -733,10 +733,12 @@ header .LinkDiv a {
     display: flex;
     justify-content: center;
     background: #f2f2f2; /* نفس خلفية الصفحة */
+    overflow: hidden;
 }
 
 /* CTA Content Box */
 .cta-box {
+    overflow: hidden;
     width: 80%;
     max-width: 1200px;
     background: #1f1f1f;

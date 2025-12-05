@@ -73,7 +73,9 @@ footer{
         grid-template-columns: 1fr;
         text-align: center;
     }
-
+    .margin-right{
+        margin-right: 0px;
+    }
     footer {
         padding: 40px 20px;
     }
