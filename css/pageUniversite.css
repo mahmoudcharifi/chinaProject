@@ -184,3 +184,120 @@ header .LinkDiv a {
     color: var(--main--color);
     text-decoration: underline;
 }
+
+
+
+
+
+
+/* SECTION */
+.universities {
+    width: 100%;
+    padding: 40px 20px;
+    text-align: center;
+    background-color: var(--backround-color);
+}
+
+.universities h2 {
+    font-size: 60px;
+    color: rgb(60, 60, 60);
+    margin-bottom: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* GRID */
+.uni-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding: 0 20px;
+}
+
+/* CARD STYLE */
+.uni-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.3s ease;
+}
+
+.uni-card img {
+    width: 95px;
+    height: 95px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    border-radius: 17px;
+}
+
+.uni-card h3 {
+    font-size: 17px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.uni-card p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+/* Button */
+.uni-card button {
+    border: 1px solid var(--main--color);
+    background: white;
+    padding: 10px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+.uni-card button:hover {
+    background: var(--main--color);
+    color: var(--text-color);
+}
+
+/* Hover effect */
+.uni-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+}
+
+
+/* 🌟 RESPONSIVE BREAKPOINTS : EXACT & CLEAN */
+
+/* Large tablets (1024px) → 3 cards */
+@media (max-width: 1200px) {
+    .uni-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Tablets (768px) → 2 cards */
+@media (max-width: 900px) {
+    .uni-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile → 1 card */
+@media (max-width: 550px) {
+    .uni-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .uni-card {
+        padding: 20px;
+    }
+
+    .universities h2 {
+        font-size: 26px;
+    }
+}
