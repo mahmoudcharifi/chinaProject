@@ -721,3 +721,91 @@ header .LinkDiv a {
     color: var(--main--color);
     text-decoration: underline;
 }
+
+
+
+
+
+/* CTA Section Wrapper */
+.cta-section {
+    width: 100%;
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+    background: #f2f2f2; /* نفس خلفية الصفحة */
+}
+
+/* CTA Content Box */
+.cta-box {
+    width: 80%;
+    max-width: 1200px;
+    background: #1f1f1f;
+    padding: 35px 60px;
+    border-radius: 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+/* Title */
+.cta-box h3 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* CTA Button */
+.cta-btn {
+    background: #ff0020;
+    padding: 12px 28px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: 0.3s ease;
+}
+
+.cta-btn:hover {
+    background: #cc001a;
+}
+
+/* Background faint graphic (optional) */
+.cta-box::after {
+    content: "";
+    position: absolute;
+    right: 40%;
+    width: 300px;
+    height: 300px;
+    background: url("img/targetBG.png") no-repeat center/contain;
+    opacity: 0.12; /* نفس تأثير الصورة اللي فـ screenshot */
+    pointer-events: none;
+}
+
+
+/* 🌟 Responsive */
+@media (max-width: 900px) {
+    .cta-box {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        padding: 40px 20px;
+    }
+
+    .cta-box h3 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 500px) {
+    .cta-btn {
+        font-size: 14px;
+        padding: 10px 22px;
+    }
+
+    .cta-box h3 {
+        font-size: 20px;
+    }
+}
